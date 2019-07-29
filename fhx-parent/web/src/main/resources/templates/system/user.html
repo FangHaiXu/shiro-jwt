@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!-- Title and other stuffs -->
+    <title>用户管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="">
+    <!-- Stylesheets -->
+    <link href="../../static/style/bootstrap.css" rel="stylesheet">
+    <!-- Font awesome icon -->
+    <link rel="stylesheet" href="../../static/style/font-awesome.css">
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="../../static/style/jquery-ui.css">
+    <!-- Calendar -->
+    <link rel="stylesheet" href="../../static/style/fullcalendar.css">
+    <!-- prettyPhoto -->
+    <link rel="stylesheet" href="../../static/style/prettyPhoto.css">
+    <!-- Star rating -->
+    <link rel="stylesheet" href="../../static/style/rateit.css">
+    <!-- Date picker -->
+    <link rel="stylesheet" href="../../static/style/bootstrap-datetimepicker.min.css">
+    <!-- CLEditor -->
+    <link rel="stylesheet" href="../../static/style/jquery.cleditor.css">
+    <!-- Bootstrap toggle -->
+    <link rel="stylesheet" href="../../static/style/bootstrap-switch.css">
+    <!-- Main stylesheet -->
+    <link href="../../static/style/style.css" rel="stylesheet">
+    <!-- Widgets stylesheet -->
+    <link href="../../static/style/widgets.css" rel="stylesheet">
+
+    <!-- HTML5 Support for IE -->
+    <!--[if lt IE 9]>
+    <script src="../../static/js/html5shim.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!--头部-->
+<div th:replace="include/_header :: _header"></div>
+
+<!--消息部分-->
+<div th:replace="include/_record :: _record"></div>
+
+<div class="content">
+    <div th:replace="include/_left :: _left"></div>
+    <div class="mainbar">
+        <div class="page-head">
+            <h2 class="pull-left"><i class="icon-table"></i> 用户管理</h2>
+            <div class="bread-crumb pull-right">
+                <a href="/index"><i class="icon-home"></i> 首页</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="matter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="widget">
+
+                            <div class="widget-head">
+                                <div class="pull-left">用户列表</div>
+                                <div class="widget-icons pull-right">
+                                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="widget-content">
+
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>名称</th>
+                                        <th>地址</th>
+                                        <th>时间</th>
+                                        <th>角色</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>张三</td>
+                                        <td>山西</td>
+                                        <td>2019-07-24</td>
+                                        <td>admin</td>
+                                        <td><span class="label label-success">启用</span></td>
+                                        <td>
+                                            <button class="btn btn-xs btn-success"><i class="icon-ok"></i></button>
+                                            <button class="btn btn-xs btn-warning"><i class="icon-pencil"></i></button>
+                                            <button class="btn btn-xs btn-danger"><i class="icon-remove"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>李四</td>
+                                        <td>太原</td>
+                                        <td>2019-07-24</td>
+                                        <td>user</td>
+                                        <td><span class="label label-danger">禁用</span></td>
+                                        <td>
+                                            <div class="btn-group1">
+                                                <button class="btn btn-xs btn-success"><i class="icon-ok"></i></button>
+                                                <button class="btn btn-xs btn-warning"><i class="icon-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-xs btn-danger"><i class="icon-remove"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="widget-foot">
+                                    <ul class="pagination pull-right">
+                                        <li><a href="#">上一页</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">下一页</a></li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="copy">Copyright &copy; 2012 | <a href="#">Your Site</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+<span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
+<!-- JS -->
+<script src="../../static/js/jquery.js"></script> <!-- jQuery -->
+<script src="../../static/js/bootstrap.js"></script> <!-- Bootstrap -->
+<script src="../../static/js/jquery-ui-1.9.2.custom.min.js"></script> <!-- jQuery UI -->
+<script src="../../static/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+<script src="../../static/js/jquery.rateit.min.js"></script> <!-- RateIt - Star rating -->
+<script src="../../static/js/jquery.prettyPhoto.js"></script> <!-- prettyPhoto -->
+
+<!-- jQuery Flot -->
+<script src="../../static/js/excanvas.min.js"></script>
+<script src="../../static/js/jquery.flot.js"></script>
+<script src="../../static/js/jquery.flot.resize.js"></script>
+<script src="../../static/js/jquery.flot.pie.js"></script>
+<script src="../../static/js/jquery.flot.stack.js"></script>
+
+<!-- jQuery Notification - Noty -->
+<script src="../../static/js/jquery.noty.js"></script> <!-- jQuery Notify -->
+<script src="../../static/js/themes/default.js"></script> <!-- jQuery Notify -->
+<script src="../../static/js/layouts/bottom.js"></script> <!-- jQuery Notify -->
+<script src="../../static/js/layouts/topRight.js"></script> <!-- jQuery Notify -->
+<script src="../../static/js/layouts/top.js"></script> <!-- jQuery Notify -->
+<!-- jQuery Notification ends -->
+<script src="../../static/js/sparklines.js"></script> <!-- Sparklines -->
+<script src="../../static/js/jquery.cleditor.min.js"></script> <!-- CLEditor -->
+<script src="../../static/js/bootstrap-datetimepicker.min.js"></script> <!-- Date picker -->
+<script src="../../static/js/bootstrap-switch.min.js"></script> <!-- Bootstrap Toggle -->
+<script src="../../static/js/filter.js"></script> <!-- Filter for support page -->
+<script src="../../static/js/custom.js"></script> <!-- Custom codes -->
+<script src="../../static/js/charts.js"></script> <!-- Charts & Graphs -->
+<script src="../../static/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    // 左侧状态
+    $(".left_status_system").addClass("open");
+
+
+
+</script>
+</body>
+</html>

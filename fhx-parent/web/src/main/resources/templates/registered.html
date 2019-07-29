@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!-- Title and other stuffs -->
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="">
+    <!-- Stylesheets -->
+    <link href="../static/style/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style/font-awesome.css">
+    <link href="../static/style/style.css" rel="stylesheet">
+
+    <script src="../static/js/html5shim.js"></script>
+</head>
+
+<body>
+
+<div class="admin-form">
+    <!--提示框-->
+    <div th:replace="include/prompt_box :: prompt_box"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Widget starts -->
+                <div class="widget wred">
+                    <div class="widget-head">
+                        <i class="icon-lock"></i> 注册
+                    </div>
+                    <div class="widget-content">
+                        <div class="padd">
+
+                            <div class="form-horizontal" id="form_registered">
+                                <!-- Registration form starts -->
+                                <!-- Name -->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3" :for="username">用户名</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" v-model="username" placeholder="请输入用户名">
+                                    </div>
+                                </div>
+                                <!-- Password -->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3" :for="password">密码</label>
+                                    <div class="col-lg-9">
+                                        <input @blur="isPassword" type="password"
+                                               class="form-control" v-model="password" placeholder="请输入密码">
+                                    </div>
+                                </div>
+                                <!-- newPassword -->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3" :for="newPassword">确认密码</label>
+                                    <div class="col-lg-9">
+                                        <input @blur="isPassword" type="password"
+                                               class="form-control" v-model="newPassword" placeholder="确认密码">
+                                    </div>
+                                </div>
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3" :for="email">邮箱</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" v-model="email" placeholder="请输入邮箱">
+                                    </div>
+                                </div>
+                                <!-- Select box -->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">角色</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" v-model="roleId">
+                                            <option value="">请选择角色</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Remember me checkbox and sign in button -->
+                                <div class="col-lg-9 col-lg-offset-3" id="message" v-html="message">
+
+                                </div>
+                                <!-- Accept box and button s-->
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <br/>
+                                        <button type="submit" class="btn btn-danger" @click="registered">注册</button>
+                                        <button type="reset" class="btn btn-success" @click="emptyForm">重置</button>
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        已经注册了? <a href="/login">登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- JS -->
+<script src="../static/js/jquery.js"></script>
+<script src="../static/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+<script src="../static/model.js"></script>
+<script>
+    new Vue({
+        data: {
+            message: '',
+            username: '',
+            password: '',
+            newPassword: '',
+            roleId: '',
+            email: ''
+        },
+        methods: {
+            /*提交注册信息*/
+            registered: function () {
+                var params = new URLSearchParams();
+                params.append("username", this.username);
+                params.append("password", this.password);
+                params.append("roleId", this.roleId);
+                params.append("email", this.email);
+                axios.post("/user/saveUser", params).then(function (value) {
+                    var res = value.data;
+                    if (res.status) {
+                        prompt_show('prompt_box_modal', '<p>添加成功</p>');
+                    } else {
+                        prompt_show('prompt_box_modal', '<p>' + res.msg + '</p>');
+                    }
+                }, function (reason) {
+                    console.log(reason);
+                });
+            },
+            /*判断用户密码是否一致*/
+            isPassword: function () {
+                var password = this.password;
+                var newPassword = this.newPassword;
+                if (password !== newPassword) {
+                    this.message = '<p style="color: red">两次输入的密码不一致</p>'
+                } else {
+                    this.message = '';
+                }
+            },
+            /*清空form表单*/
+            emptyForm: function () {
+                 this.message= '';
+                 this.username= '';
+                 this.password= '';
+                 this.newPassword= '';
+                 this.roleId= '';
+                 this.email= '';
+            }
+        }
+    }).$mount('#form_registered');
+
+</script>
+</body>
+</html>

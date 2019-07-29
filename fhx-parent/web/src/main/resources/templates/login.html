@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="">
+    <!-- Stylesheets -->
+    <link href="../static/style/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style/font-awesome.css">
+    <link href="../static/style/style.css" rel="stylesheet">
+    <script src="../static/js/html5shim.js"></script>
+</head>
+<body>
+<!-- Form area -->
+<div class="admin-form">
+    <!--提示框-->
+    <div th:replace="include/prompt_box :: prompt_box"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Widget starts -->
+                <div class="widget worange">
+                    <!-- Widget head -->
+                    <div class="widget-head">
+                        <i class="icon-lock"></i> 登录
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="padd" id="login_form">
+                            <!-- Login form -->
+                            <div class="form-horizontal">
+                                <!-- 用户名 -->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3" :for="username">用户名</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" v-model="username" placeholder="用户名">
+                                    </div>
+                                </div>
+                                <!-- Password -->
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3" :for="password">密码</label>
+                                    <div class="col-lg-9">
+                                        <input type="password" class="form-control" v-model="password" placeholder="密码">
+                                    </div>
+                                </div>
+                                <!-- Remember me checkbox and sign in button -->
+                                <div class="form-group">
+                                    <div class="col-lg-9 col-lg-offset-3">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" v-model="rememberMe"> 记住账号
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-danger" @click="login">登录</button>
+                                    <button type="reset" class="btn btn-default">重置</button>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-foot">
+                        没有账号? <a href="/registered">去注册</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JS -->
+<script src="../static/js/jquery.js"></script>
+<script src="../static/vue.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+<script src="../static/model.js"></script>
+<script>
+    new Vue({
+        data: {
+            username: '',
+            password: '',
+            rememberMe: ''
+        },
+        methods: {
+            // 登录
+            login: function () {
+                var params = new URLSearchParams();
+                params.append("username", this.username);
+                params.append("password", this.password);
+                params.append("rememberMe",this.rememberMe? true: false);
+                axios.post("/user/login", params).then(function (value) {
+                    var res = value.data;
+                    if (res.status) {
+                        window.location.href= '/index';
+                    } else {
+                        prompt_show("prompt_box_modal", res.msg);
+                    }
+                }, function (reason) {
+
+                });
+            }
+        }
+    }).$mount('#login_form');
+
+</script>
+</body>
+</html>
